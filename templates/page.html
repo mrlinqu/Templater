@@ -1,0 +1,11 @@
+{%extends main.html%}
+
+{%block content%}
+        page content
+        {{ simpleVar | uppercase }}
+        {{ simpleDate | date(d.m.Y) }}
+{%/block content%}
+
+{%block footer%}
+        page footer
+{%/block footer%}
