@@ -15,17 +15,27 @@
 <body>
     <div class="header">
         {%block header%}
-        HEADER
+        Templater.php
+	<div class="login">{: Login :}</div>
+	<div class="menu_gorizontal">{: Menu|gorizontal :}</div>
         {%/block header%}
     </div>
-    <div class="content">
-        {%block content%}CONTENT{%/block content%}
-    </div>
     <div class="menu">
-        {%block menu%}MENU{%/block footer%}
+        {%block menu%}
+	MENU
+	{%/block footer%}
     </div>
+    <div class="content">
+        {%block content%}
+	    {: Newstape :}
+	    {: Newstape|pagestape :}
+        {%/block content%}
+    </div>
+
     <div class="footer">
-        {%block footer%}FOOTER{%/block footer%}
+        {%block footer%}
+	    this is for me :)
+	{%/block footer%}
     </div>
 </body>
 </html>

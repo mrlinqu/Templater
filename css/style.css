@@ -1,6 +1,31 @@
-body{
-    
-}
-#header{
 
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input { margin: 0; padding: 0; }
+
+input, textarea, select, button, body {
+    font: 12px/16px Arial, Helvetica, sans-serif;
+}
+
+input, textarea, select, button, a {
+    outline: none;
+}
+
+.header {
+    font: 20px bold Verdana;
+    background-color: #CCCCCC;
+    height: 100px;
+    line-height: 100px;
+    vertical-align: middle;
+    padding: 5px 50px;
+}
+
+.content {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.menu{
+    padding: 10px;
+    float: right;
+    width: 200px;
+    border: 1px solid black;
 }

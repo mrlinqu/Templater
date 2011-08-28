@@ -4,7 +4,6 @@
  * User: r.khuramshin
  * Date: 26.08.11
  * Time: 10:09
- * To change this template use File | Settings | File Templates.
  */
 require_once 'init.php';
 

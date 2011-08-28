@@ -24,4 +24,6 @@ function error_handler( $errno, $errstr, $errfile, $errline )
 }
 set_error_handler("CustomErrorHandler");
 
+session_start();
+
 ?>
