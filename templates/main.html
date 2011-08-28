@@ -1,23 +1,31 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css" media="all">
+        @import url("/css/style.css");
+    </style>
+    <style type="text/css" media="print">
+        @import url("/css/style.css");
+    </style>
     <title>{{title}}</title>
 </head>
 <body>
-    <table>
-        <tr>
-            <td colspan="2">{%block header%}HEADER{%/block header%}</td>
-        </tr>
-        <tr>
-            <td>MENU</td>
-            <td>
-                {%block content%}CONTENT{%/block content%}
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">{%block footer%}FOOTER{%/block footer%}</td>
-        </tr>
-    </table>
+    <div class="header">
+        {%block header%}
+        HEADER
+        {%/block header%}
+    </div>
+    <div class="content">
+        {%block content%}CONTENT{%/block content%}
+    </div>
+    <div class="menu">
+        {%block menu%}MENU{%/block footer%}
+    </div>
+    <div class="footer">
+        {%block footer%}FOOTER{%/block footer%}
+    </div>
 </body>
 </html>
