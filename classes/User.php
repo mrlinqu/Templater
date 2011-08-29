@@ -1,6 +1,6 @@
 <?php
 
-class Login
+class User
 {
     protected $db = &Singleton::getInstance( 'Database' );
     public $user = array();
