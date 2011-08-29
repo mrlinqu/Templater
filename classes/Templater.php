@@ -42,7 +42,7 @@ class Templater
         {
             foreach( $class_matches[1] as $key => $classname )
             {
-                $class = Singleton::getInstance( $classname );
+                $class = &Singleton::getInstance( $classname );
                 if( $class_matches[3][$key] )
                 {
                     $method = $class_matches[3][$key];

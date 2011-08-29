@@ -24,6 +24,9 @@ function error_handler( $errno, $errstr, $errfile, $errline )
 }
 set_error_handler("CustomErrorHandler");
 
+require_once 'config/sysconfig.php';
+require_once 'config/DBconfig.php';
+
 session_start();
 
 ?>

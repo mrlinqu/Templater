@@ -7,7 +7,7 @@
  */
 require_once 'init.php';
 
-$tmpl = Singleton::getInstance( 'Templater' );
+$tmpl = &Singleton::getInstance( 'Templater' );
 
 $templ_vars = array('simpleVar'=>'sipleValue', 'simpleDate'=>new DateTime('now', new DateTimeZone('Europe/Moscow')));
 

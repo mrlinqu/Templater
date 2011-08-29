@@ -15,7 +15,7 @@ class Singleton {
 
     private function __clone() { /* ... */ }
 
-    public static function getInstance( $className ) {
+    public static function &getInstance( $className ) {
         if ( is_null(self::$instance[$className]) ) {
             self::$instance[$className] = new $className;
         }
