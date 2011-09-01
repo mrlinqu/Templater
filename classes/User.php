@@ -1,28 +1,52 @@
 <?php
 
-class User
+class User extends Module
 {
-    protected $db = &Singleton::getInstance( 'Database' );
-    public $user = array();
-    
+	protected $dbTable = 'users';
+
     public function __construct()
     {
-        if( isset( $_SESSION['user_id'] ) AND  intval( $_SESSION['user_id'] ) > 0 )
-        {
-            $this->user = $this->db->onerow_query( 'SELECT * FROM ' . DB_PREFIX . '_users WHERE user_id=\'' . intval( $_SESSION['user_id'] ) . '\'' );
-            if( $this->user['id'] )
-            {
-                $this->user['groups'] = explode(',', $this->user['groups']);
-            }
-        } elseif( isset( $_POST['login'] ) and $_POST['login'] == "submit" ) {
-            $_POST['login_name'] = $db->safesql( $_POST['login_name'] );
-            $_POST['login_password'] = @md5( $_POST['login_password'] );
-        }
+	    $this->newField( FLD_STRING, 'login',  'Логин', array('readOnly'=>false) );
+	    $this->newField( FLD_STRING, 'passwd', 'Пароль', array('readOnly'=>false) );
+	    $this->newField( FLD_ARRAY,  'groups', 'Членство в группах', array('defaultValue'=>array(3)) );
+	    $this->newField( FLD_STRING, 'name',   'Имя', array('defaultValue'=>'Аноним') );
+	    
+	    parent::__construct();
+
+	    if( $this->login && $this->passwd ) // в POST'е пришли данные для аутентификации
+	    {
+		    $this->auth();
+	    }
+	    elseif( intval( $_SESSION['User_id'] ) > 0 )
+	    {
+		    $this->loadById( $_SESSION['User_id'] );
+	    }
+	    
     }
-    public function getHTML()
-    {
-        
-    }
+
+	protected function auth()
+	{
+		$this->loadByQuery( "select * from $this->dbTable where login = $this->login and passwd = $this->passwd" );
+		if( !$this->id )
+		{
+			$this->msg->addMessage( 'Неверный логин или пароль' );
+		}
+	}
+
+	public function loginPanel()
+	{
+		if( $this->id )
+		{
+			return Templater::render( 'userPanel.html' );
+		} else {
+			$vars = array(
+				'loginField'  => $this->getField('login'),
+				'passwdField' => $this->getField('passwd')
+			);
+			return Templater::render( 'loginPanel.html', $vars );
+		}
+	}
+
 }
 
 ?>

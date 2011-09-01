@@ -9,7 +9,20 @@
 
 function __autoload( $className )
 {
-    require_once 'classes/' . $className . '.php';
+	if( class_exists($className) )
+		return;
+
+	$dirs = array( '', 'system/', 'modules/' );
+
+	foreach( $dirs as $dir )
+	{
+		if( file_exists('classes/' . $dir . $className . '.php') )
+		{
+			require 'classes/' . $dir . $className . '.php';
+			return;
+		}
+	}
+	throw new Exception( 'Класс {$className} не найден' );
 }
 
 function exception_handler( $exception )
@@ -22,7 +35,7 @@ function error_handler( $errno, $errstr, $errfile, $errline )
 {
     echo "{$errno}, {$errstr}, {$errfile}, {$errline}";
 }
-set_error_handler("CustomErrorHandler");
+set_error_handler("error_handler");
 
 require_once 'config/sysconfig.php';
 require_once 'config/DBconfig.php';

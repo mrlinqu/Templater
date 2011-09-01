@@ -11,13 +11,11 @@ class Singleton {
 
     protected static $instance = array();  // object instance
 
-    private function __construct() { /* ... */ }
-
-    private function __clone() { /* ... */ }
-
-    public static function &getInstance( $className ) {
-        if ( is_null(self::$instance[$className]) ) {
-            self::$instance[$className] = new $className;
+    public static function getInstance( $className )
+    {
+        if ( is_null(self::$instance[$className]) )
+        {
+            self::$instance[$className] =& new $className;
         }
         return self::$instance[$className];
     }

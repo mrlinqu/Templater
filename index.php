@@ -7,11 +7,9 @@
  */
 require_once 'init.php';
 
-$tmpl = &Singleton::getInstance( 'Templater' );
-
 $templ_vars = array('simpleVar'=>'sipleValue', 'simpleDate'=>new DateTime('now', new DateTimeZone('Europe/Moscow')));
 
-echo $tmpl->parse( 'page1.html', $templ_vars );
+echo Templater::render( 'page1.html', $templ_vars );
 
 
 ?>
