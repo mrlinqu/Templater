@@ -37,14 +37,19 @@ class Templater
 	    /*****************************
          *  классы
          */
-        // TODO переписать через preg_match: один и тот же клаас::метод может быть в шаблоне несколько раз, а заменятся должен только единожды
         $class_matches = array();
+	    $antiDouble = array();
         if( preg_match_all( '/{:\s*(\w+)(\s*\|\s*(\w+))?\s*:}/is', $template, $class_matches ) )
-        // [[0]-блок с тэгами, [1]-название класса [2]-not use [3]-название метода
+        // [0]-блок с тэгами, [1]-название класса [2]-not use [3]-название метода
         {
 	        $delayedClasses = array();
             foreach( $class_matches[1] as $key => $classname )
             {
+	            if( $antiDouble[ $classname.'::'.$class_matches[3][$key] ] ) //коряво, но как сделать красиво и эффективно - пока хз...
+		            continue;
+
+	            $antiDouble[ $classname.'::'.$class_matches[3][$key] ] = true;
+
 	            if( $classname::delayedRender ) // рендеринг отложен на конец, после всех остальных классов
 	            {
 		            $delayedClasses[$classname] = $class_matches[3][$key];
@@ -63,33 +68,37 @@ class Templater
          */
         $var_matches = array();
         if( preg_match_all( '/{{\s*(\w+)(\s*\|\s*(\w+)(\s*\(\s*(.+)\s*\))?)?\s*}}/is', $template, $var_matches ) )
-        // [[0]-блок с тэгами, [1]-название переменной [2]-not use [3]-название модификатора [4]-not use [5]-параметры модификатора
+        // [0]-блок с тэгами, [1]-название переменной [2]-not use [3]-название модификатора [4]-not use [5]-параметры модификатора
         {
             foreach( $var_matches[1] as $key => $varname )
             {
+	            if( $antiDouble[ $varname.'|'.$var_matches[3][$key].'('.$var_matches[5][$key].')' ] ) //коряво, но как сделать красиво и эффективно - пока хз...
+		            continue;
+
+	            $antiDouble[ $varname.'|'.$var_matches[3][$key].'('.$var_matches[5][$key].')' ] = true;
+
                 if( $var = $variables[$varname] )
                 {
-	                if( $var instanceof Field ) //поле
-	                {
-		                
-	                }
                     if( $modifier = $var_matches[3][$key] ) //есть модификатор
                     {
-                        if( $modparams = $var_matches[5][$key] )
+                        if( $modparams = $var_matches[5][$key] ) //модификатор с параметрами
                         {
                             $template = preg_replace( '/{{\s*'.$varname.'\s*\|\s*'.$modifier.'\s*\(\s*'.$modparams.'\s*\)\s*}}/is', self::$modifier( $var, $modparams ), $template );
                         }else{
                             $template = preg_replace( '/{{\s*'.$varname.'\s*\|\s*'.$modifier.'\s*}}/is', self::$$modifier( $var ), $template );
                         }
                     }else{
-                        $template = preg_replace( '/{{\s*' . $varname . '\s*}}/is', $var, $template );
+                        $template = preg_replace( '/{{\s*' . $varname . '\s*}}/is', ($var instanceof Field) ? $var->toHTML() : $var, $template );
                     }
                 }else{
 
                 }
             }
         }
-        
+
+        /*****************************
+         *  end
+         */
         return $template;
     }
 
@@ -110,26 +119,31 @@ class Templater
 	 * Модификаторы переменных
 	 **********************************************/
     public static function date( $var, $format ) {
-        return date_format( $var, $format );
+        if( $var instanceof Field )
+            return date_format( $var->toString(), $format );
+        else
+            return date_format( $var, $format );
     }
 	
     public static function uppercase( $var ) {
-        return strtoupper( $var );
+        if( $var instanceof Field )
+            return strtoupper( $var->toString() );
+        else
+            return strtoupper( $var );
     }
 
     public static function lowercase( $var ) {
-        return strtolower( $var );
+        if( $var instanceof Field )
+            return strtolower( $var->toString() );
+        else
+            return strtolower( $var );
     }
 
 	public static function caption( $var ) {
 		if( $var instanceof Field )
-		{
 			return $var->getCaption();
-		}
 		else
-		{
 			return '';
-		}
     }
 }
 
