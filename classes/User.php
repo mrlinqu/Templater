@@ -7,7 +7,7 @@ class User extends Module
     public function __construct()
     {
 	    $this->newField( FLD_STRING, "login",  "Логин", array("readOnly"=>false) );
-	    $this->newField( FLD_STRING, "passwd", "Пароль", array("readOnly"=>false) );
+	    $this->newField( FLD_STRING, "passwd", "Пароль", array("readOnly"=>false, "inputType"=>"password") );
 	    $this->newField( FLD_ARRAY,  "groups", "Членство в группах", array("defaultValue"=>array(3)) );
 	    $this->newField( FLD_STRING, "name",   "Имя", array("defaultValue"=>"Аноним") );
 	    
