@@ -36,18 +36,18 @@ class Module
 
 	public function __get( $name )
 	{
-		if( !isset($fields[$name]) )
+		if( !isset($this->fields[$name]) )
 			return null;
 		
-		return $fields[$name]->getValue();
+		return $this->fields[$name]->getValue();
 	}
 
 	public  function __set( $name, $value )
 	{
-		if( !isset($fields[$name]) )
+		if( !isset($this->fields[$name]) )
 			throw new Exception( "Попытка установить значение несуществующего поля {$name} у объекта ".get_class($this) );
 
-		$fields[$name]->setValue( $name, $value );
+		$this->fields[$name]->setValue( $name, $value );
 	}
 
 	protected function initByPOST()
@@ -67,7 +67,7 @@ class Module
 
 	protected function newField( $type, $name, $caption, $properties=array() )
 	{
-		if( isset($fields[$name]) )
+		if( isset($this->fields[$name]) )
 			throw new Exception( "Повторное определение поля {$name} у объекта ".get_class($this) );
 
 		$className = 'Field'.$type;
