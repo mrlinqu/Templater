@@ -77,7 +77,7 @@ class Templater
 
 	            $antiDouble[ $varname.'|'.$var_matches[3][$key].'('.$var_matches[5][$key].')' ] = true;
 
-                if( $var = $variables[$varname] )
+                if( isset($variables[$varname]) && $var = $variables[$varname] )
                 {
                     if( $modifier = $var_matches[3][$key] ) //есть модификатор
                     {
