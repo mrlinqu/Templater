@@ -13,9 +13,7 @@ $sys__startTime = microtime(true);
 
 require_once 'init.php';
 
-$templ_vars = array('simpleVar'=>'sipleValue', 'simpleDate'=>new DateTime('now', new DateTimeZone('Europe/Moscow')));
-
-echo Templater::render( 'main.html', $templ_vars );
+echo Templater::render( 'main.html' );
 
 echo sprintf("\n<!-- Generated in %.04f seconds -->\n", microtime(true) - $sys__startTime);
 
