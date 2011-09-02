@@ -9,7 +9,7 @@
 
 define( "DB_HOST",   "localhost" );
 define( "DB_DBASE",  "tst" );
-define( "DB_PREFIX", "tst" );
+define( "DB_PREFIX", "tst_" );
 define( "DB_USER",   "tst" );
 define( "DB_PASSWD", "hGASjas323" );
 

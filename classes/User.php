@@ -2,10 +2,10 @@
 
 class User extends Module
 {
-	protected $dbTable = 'users';
-
     public function __construct()
     {
+	    $this->dbTable = DB_PREFIX."users";
+
 	    $this->newField( FLD_STRING, "login",  "Ëîãèí",              array("readOnly"=>false) );
 	    $this->newField( FLD_STRING, "passwd", "Ïàğîëü",             array("readOnly"=>false, "inputType"=>"password") );
 	    $this->newField( FLD_ARRAY,  "groups", "×ëåíñòâî â ãğóïïàõ", array("defaultValue"=>array(3)) );
