@@ -93,8 +93,7 @@ class Module
 
 	protected function loadByQuery( $queryString )
 	{
-		$row = $this->db->onerow_query( $queryString );
-		if( $row ){
+		if( $row = $this->db->query_row( $queryString ) ){
 			$this->loadFromArray( $row );
 		}else{
 			$this->resetToDefault();

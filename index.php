@@ -17,4 +17,7 @@ echo Templater::render( 'main.html' );
 
 echo sprintf("\n<!-- Generated in %.04f seconds -->\n", microtime(true) - $sys__startTime);
 
+if( isset(DB_BENCH) )
+	echo sprintf("\n<!-- DB queries %d in %.04f seconds -->\n", DB::$queryCount, DB::$queryTime );
+
 ?>

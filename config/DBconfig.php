@@ -13,4 +13,6 @@ define( "DB_PREFIX", "tst" );
 define( "DB_USER",   "tst" );
 define( "DB_PASSWD", "hGASjas323" );
 
+define( "DB_BENCH", true );
+
 ?>
