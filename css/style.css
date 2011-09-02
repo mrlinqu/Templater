@@ -11,9 +11,9 @@ input, textarea, select, button, a {
 
 .header {
     font: 20px bold Verdana;
-    background-color: #CCCCCC;
+    background-color: buttonface;
     height: 100px;
-    line-height: 100px;
+    /*line-height: 100px;*/
     vertical-align: middle;
     padding: 5px 50px;
 }
@@ -23,9 +23,13 @@ input, textarea, select, button, a {
     border: 1px solid black;
 }
 
-.menu{
+.menu {
     padding: 10px;
     float: right;
     width: 200px;
     border: 1px solid black;
+}
+
+.login {
+    float: right;
 }

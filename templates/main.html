@@ -13,29 +13,34 @@
     <title>{{title}}</title>
 </head>
 <body>
-    <div class="header">
-        {%block header%}
-        Templater.php
-	<div class="login">{: User|loginPanel :}</div>
-	<div class="menu_gorizontal"></div>
-        {%/block header%}
-    </div>
-    <div class="menu">
-        {%block menu%}
-	MENU
-	{%/block footer%}
-    </div>
-    <div class="content">
-        {: SystemMessages :}
-        {%block content%}
-
-        {%/block content%}
-    </div>
-
-    <div class="footer">
-        {%block footer%}
-	    this is for me :)
-	{%/block footer%}
-    </div>
+<table width="100%" height="100%">
+    <tr>
+        <td colspan="2" class="header">
+            {%block header%}
+            Templater.php
+            <div class="login">{: User|loginPanel :}</div>
+            <div class="menu_gorizontal"></div>
+            {%/block header%}
+        </td>
+    </tr>
+    <tr>
+        <td class="content">
+            {: SystemMessages :}
+            {%block content%}{%/block content%}
+        </td>
+        <td class="menu">
+            {%block menu%}
+            MENU
+            {%/block menu%}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="footer">
+            {%block footer%}
+            this is for me :)
+            {%/block footer%}
+        </td>
+    </tr>
+</table>
 </body>
 </html>
