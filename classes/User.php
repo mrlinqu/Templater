@@ -39,7 +39,7 @@ class User extends Module
 	{
 		if( $this->id )
 		{
-			return Templater::render( 'userPanel.html' );
+			return Templater::render( 'userPanel.html', array("userName"=>$this->getField('name')) );
 		} else {
 			$vars = array(
 				'loginField'  => $this->getField('login'),
