@@ -49,9 +49,13 @@ class Field
 
 	public function toHTML()
 	{
-		$readonly = $this->readOnly ? "readonly" : "" ;
-		$name = isset($this->namePrefix) ? $this->namePrefix."_".$this->name : $this->name ;
-		return "<input id='{$name}' name='{$name}' type='{$this->inputType}' value='{$this->value}' {$readonly} {$this->htmlAttributes} />";
+		if( $this->readOnly )
+		{
+			return $this->getValue();
+		}else{
+			$name = isset($this->namePrefix) ? $this->namePrefix."_".$this->name : $this->name ;
+			return "<input id='{$name}' name='{$name}' type='{$this->inputType}' value='{$this->value}' {$this->htmlAttributes} />";
+		}
 	}
 
 	public function toJSON(){ return ""; }
