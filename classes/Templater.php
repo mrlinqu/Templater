@@ -13,6 +13,9 @@ class Templater
 
     public static function render( $templateFile, $variables=array() )
     {
+	    if( !file_exists(self::$templates_dir . $templateFile) )
+		    throw new Exception( "Не найден шаблон {$templateFile}" );
+	    
         $template = file_get_contents( self::$templates_dir . $templateFile );
 
         /*****************************
@@ -25,6 +28,9 @@ class Templater
             if( preg_match_all( '/{%\s*block\s+(\S+)\s*%}(.*){%\s*\/block\s+\1\s*%}/is', $template, $blocks_matches ) )
             // [0]-блок с тэгами, [1]-название блока [2]-содержимое блока
             {
+	            if( !file_exists(self::$templates_dir . $ext_matches[1]) )
+		            throw new Exception( "Не найден шаблон {$ext_matches[1]}" );
+
                 $template = file_get_contents( self::$templates_dir . $ext_matches[1] );
                 foreach( $blocks_matches[1] as $key => $blockname )
                 {
