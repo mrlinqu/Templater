@@ -32,7 +32,12 @@ class DB
 		    $db__startTime = microtime(true);
 	    }
 
-	    if( $result = $this->dblink->query( $queryString ) )
+	    $result = $this->dblink->query( $queryString );
+
+	    if ($this->dblink->error)
+            throw new Exception("MySQL error {$this->dblink->error} <br> Query:<br> {$queryString}", $this->dblink->errno);
+
+	    if( $result )
 	    {
 		    $arr = $result->fetch_all();
 		    $result->close();
@@ -57,7 +62,12 @@ class DB
 		    $db__startTime = microtime(true);
 	    }
 
-	    if( $result = $this->dblink->query( $queryString ) )
+	    $result = $this->dblink->query( $queryString );
+
+	    if ($this->dblink->error)
+            throw new Exception("MySQL error {$this->dblink->error} <br> Query:<br> {$queryString}", $this->dblink->errno);
+
+	    if( $result )
 	    {
 		    $arr = $result->fetch_array();
 		    $result->close();
@@ -81,7 +91,12 @@ class DB
 		    $db__startTime = microtime(true);
 	    }
 
-	    if( $result = $this->dblink->query( $queryString ) )
+	    $result = $this->dblink->query( $queryString );
+
+	    if ($this->dblink->error)
+            throw new Exception("MySQL error {$this->dblink->error} <br> Query:<br> {$queryString}", $this->dblink->errno);
+
+	    if( $result )
 	    {
 		    $row = $result->fetch_row();
 		    $result->close();
