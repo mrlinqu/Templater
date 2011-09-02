@@ -7,10 +7,10 @@
  * To change this template use File | Settings | File Templates.
  */
 
-define( "DB_HOST",   "" );
-define( "DB_DBASE",  "" );
-define( "DB_PREFIX", "" );
-define( "DB_USER",   "" );
-define( "DB_PASSWD", "" );
+define( "DB_HOST",   "localhost" );
+define( "DB_DBASE",  "tst" );
+define( "DB_PREFIX", "tst" );
+define( "DB_USER",   "tst" );
+define( "DB_PASSWD", "hGASjas323" );
 
 ?>
