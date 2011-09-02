@@ -27,7 +27,8 @@ class User extends Module
 
 	protected function auth()
 	{
-		$this->loadByQuery( "select * from {$this->dbTable} where login = '{$this->login}' and passwd = MD5('{$this->login.$this->passwd}')" );
+		$pass = MD5($this->login.$this->passwd);
+		$this->loadByQuery( "select * from {$this->dbTable} where login = '{$this->login}' and passwd = '{$pass}'" );
 		if( !$this->id )
 		{
 			$this->msg->addMessage( 'Неверный логин или пароль' );

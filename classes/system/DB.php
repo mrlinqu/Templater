@@ -26,7 +26,7 @@ class DB
 	
     public function query( $queryString )
     {
-	    if( isset(DB_BENCH) )
+	    if( defined("DB_BENCH") )
 	    {
 		    self::$queryCount++;
 		    $db__startTime = microtime(true);
@@ -37,12 +37,12 @@ class DB
 		    $arr = $result->fetch_all();
 		    $result->close();
 
-		    if( isset(DB_BENCH) )
+		    if( defined("DB_BENCH") )
 		        self::$queryTime += microtime(true) - $db__startTime;
 
 		    return $arr;
 	    }else{
-		    if( isset(DB_BENCH) )
+		    if( defined("DB_BENCH") )
 		        self::$queryTime += microtime(true) - $db__startTime;
 
 		    return false;
@@ -51,7 +51,7 @@ class DB
     }
     public function query_row( $queryString )
     {
-	    if( isset(DB_BENCH) )
+	    if( defined("DB_BENCH") )
 	    {
 		    self::$queryCount++;
 		    $db__startTime = microtime(true);
@@ -62,12 +62,12 @@ class DB
 		    $arr = $result->fetch_array();
 		    $result->close();
 
-		    if( isset(DB_BENCH) )
+		    if( defined("DB_BENCH") )
 		        self::$queryTime += microtime(true) - $db__startTime;
 
 		    return $arr;
 	    }else{
-		    if( isset(DB_BENCH) )
+		    if( defined("DB_BENCH") )
 		        self::$queryTime += microtime(true) - $db__startTime;
 
 		    return false;
@@ -75,7 +75,7 @@ class DB
     }
     public function query_field( $queryString )
     {
-	    if( isset(DB_BENCH) )
+	    if( defined("DB_BENCH") )
 	    {
 		    self::$queryCount++;
 		    $db__startTime = microtime(true);
@@ -86,12 +86,12 @@ class DB
 		    $row = $result->fetch_row();
 		    $result->close();
 
-		    if( isset(DB_BENCH) )
+		    if( defined("DB_BENCH") )
 		        self::$queryTime += microtime(true) - $db__startTime;
 
 		    return $row[0];
 	    }else{
-		    if( isset(DB_BENCH) )
+		    if( defined("DB_BENCH") )
 		        self::$queryTime += microtime(true) - $db__startTime;
 
 		    return false;
