@@ -6,10 +6,10 @@ class User extends Module
 
     public function __construct()
     {
-	    $this->newField( FLD_STRING, 'login',  'Логин', array('readOnly'=>false) );
-	    $this->newField( FLD_STRING, 'passwd', 'Пароль', array('readOnly'=>false) );
-	    $this->newField( FLD_ARRAY,  'groups', 'Членство в группах', array('defaultValue'=>array(3)) );
-	    $this->newField( FLD_STRING, 'name',   'Имя', array('defaultValue'=>'Аноним') );
+	    $this->newField( FLD_STRING, "login",  "Логин", array("readOnly"=>false) );
+	    $this->newField( FLD_STRING, "passwd", "Пароль", array("readOnly"=>false) );
+	    $this->newField( FLD_ARRAY,  "groups", "Членство в группах", array("defaultValue"=>array(3)) );
+	    $this->newField( FLD_STRING, "name",   "Имя", array("defaultValue"=>"Аноним") );
 	    
 	    parent::__construct();
 
@@ -17,7 +17,7 @@ class User extends Module
 	    {
 		    $this->auth();
 	    }
-	    elseif( intval( $_SESSION['User_id'] ) > 0 )
+	    elseif( isset($_SESSION['User_id']) && intval($_SESSION['User_id']) > 0 )
 	    {
 		    $this->loadById( $_SESSION['User_id'] );
 	    }
@@ -26,7 +26,7 @@ class User extends Module
 
 	protected function auth()
 	{
-		$this->loadByQuery( "select * from $this->dbTable where login = $this->login and passwd = $this->passwd" );
+		$this->loadByQuery( "select * from {$this->dbTable} where login = '{$this->login}' and passwd = '{$this->passwd}'" );
 		if( !$this->id )
 		{
 			$this->msg->addMessage( 'Неверный логин или пароль' );

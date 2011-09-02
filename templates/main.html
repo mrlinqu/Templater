@@ -17,7 +17,7 @@
         {%block header%}
         Templater.php
 	<div class="login">{: User|loginPanel :}</div>
-	<div class="menu_gorizontal">{: Menu|gorizontal :}</div>
+	<div class="menu_gorizontal"></div>
         {%/block header%}
     </div>
     <div class="menu">
@@ -28,8 +28,7 @@
     <div class="content">
         {: SystemMessages :}
         {%block content%}
-	    {: Newstape :}
-	    {: Newstape|pagestape :}
+
         {%/block content%}
     </div>
 

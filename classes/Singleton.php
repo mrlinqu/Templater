@@ -13,9 +13,9 @@ class Singleton {
 
     public static function getInstance( $className )
     {
-        if ( is_null(self::$instance[$className]) )
+        if ( !isset(self::$instance[$className]) )
         {
-            self::$instance[$className] =& new $className;
+            self::$instance[$className] = new $className;
         }
         return self::$instance[$className];
     }

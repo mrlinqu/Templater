@@ -1,8 +1,8 @@
 <?php
 
-class Menu
+class Menu extends Module
 {
-    public getHTML()
+    public function getHTML()
     {
     }
 }

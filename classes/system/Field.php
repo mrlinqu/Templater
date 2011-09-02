@@ -7,36 +7,25 @@
  * To change this template use File | Settings | File Templates.
  */
 
-define( 'FLD_STRING',   'String'   );
-define( 'FLD_TEXT',     'Text'     );
-define( 'FLD_INT',      'Int'      );
-define( 'FLD_FLOAT',    'Float'    );
-define( 'FLD_CURRENCY', 'Currency' );
-define( 'FLD_DATE',     'Date'     );
-define( 'FLD_DATETIME', 'DateTime' );
-define( 'FLD_ARRAY',    'Array'    );
-define( 'FLD_TABLE',    'Table'    );
-define( 'FLD_OBJECT',   'Object'   );
-
 class Field
 {
-	protected $name = '';
-	protected $caption = '';
+	protected $name = "";
+	protected $caption = "";
 	protected $value = null;
 
 	public $defaultValue   = null;
 	public $readOnly       = true;
-	public $inputType      = 'text';
-	public $htmlAttributes = '';
+	public $inputType      = "text";
+	public $htmlAttributes = "";
 
-	public function __construct( $name, $caption, &$properties=array() )
+	public function __construct( $name, $caption, $properties=array() )
 	{
 		$this->name = $name;
 		$this->caption = $caption;
 		foreach( $properties as $propName => $propVal )
 		{
-			$this->$propName =& $propVal;
-			if( $propName == 'defaultValue' )
+			$this->$propName = $propVal;
+			if( $propName == "defaultValue" )
 			{
 				$this->setValue( $propVal );
 			}
@@ -60,13 +49,13 @@ class Field
 
 	public function toHTML()
 	{
-		$readonly = $this->readOnly ? 'readonly' : '' ;
-		$name = isset($this->namePrefix) ? $this->namePrefix.'_'.$this->name : $this->name ;
-		return "<input id='$name' name='$name' type='$this->inputType' value='$this->value' $readonly $this->htmlAttributes />";
+		$readonly = $this->readOnly ? "readonly" : "" ;
+		$name = isset($this->namePrefix) ? $this->namePrefix."_".$this->name : $this->name ;
+		return "<input id='{$name}' name='{$name}' type='{$this->inputType}' value='{$this->value}' {$readonly} {$this->htmlAttributes} />";
 	}
 
-	public function toJSON(){ return ''; }
-	public function toXML(){ return ''; }
+	public function toJSON(){ return ""; }
+	public function toXML(){ return ""; }
 	
 	public function toString()
 	{
@@ -75,7 +64,7 @@ class Field
 
 	public function __toString()
     {
-        return toString();
+        return $this->toString();
     }
 
 	public function getCaption()

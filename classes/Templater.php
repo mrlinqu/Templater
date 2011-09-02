@@ -45,7 +45,7 @@ class Templater
 	        $delayedClasses = array();
             foreach( $class_matches[1] as $key => $classname )
             {
-	            if( $antiDouble[ $classname.'::'.$class_matches[3][$key] ] ) //коряво, но как сделать красиво и эффективно - пока хз...
+	            if( isset($antiDouble[ $classname.'::'.$class_matches[3][$key] ]) ) //коряво, но как сделать красиво и эффективно - пока хз...
 		            continue;
 
 	            $antiDouble[ $classname.'::'.$class_matches[3][$key] ] = true;
@@ -72,7 +72,7 @@ class Templater
         {
             foreach( $var_matches[1] as $key => $varname )
             {
-	            if( $antiDouble[ $varname.'|'.$var_matches[3][$key].'('.$var_matches[5][$key].')' ] ) //коряво, но как сделать красиво и эффективно - пока хз...
+	            if( isset($antiDouble[ $varname.'|'.$var_matches[3][$key].'('.$var_matches[5][$key].')' ]) ) //коряво, но как сделать красиво и эффективно - пока хз...
 		            continue;
 
 	            $antiDouble[ $varname.'|'.$var_matches[3][$key].'('.$var_matches[5][$key].')' ] = true;
@@ -85,7 +85,7 @@ class Templater
                         {
                             $template = preg_replace( '/{{\s*'.$varname.'\s*\|\s*'.$modifier.'\s*\(\s*'.$modparams.'\s*\)\s*}}/is', self::$modifier( $var, $modparams ), $template );
                         }else{
-                            $template = preg_replace( '/{{\s*'.$varname.'\s*\|\s*'.$modifier.'\s*}}/is', self::$$modifier( $var ), $template );
+                            $template = preg_replace( '/{{\s*'.$varname.'\s*\|\s*'.$modifier.'\s*}}/is', self::$modifier( $var ), $template );
                         }
                     }else{
                         $template = preg_replace( '/{{\s*' . $varname . '\s*}}/is', ($var instanceof Field) ? $var->toHTML() : $var, $template );
